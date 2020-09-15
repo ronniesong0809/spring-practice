@@ -25,6 +25,7 @@ public class RelationalDataAccessApplication implements CommandLineRunner {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Override
     public void run(String... strings) throws Exception {
         log.info("Creating tables");
 
@@ -40,12 +41,13 @@ public class RelationalDataAccessApplication implements CommandLineRunner {
 
         jdbcTemplate.batchUpdate("INSERT INTO customers(first_name, last_name) VALUES (?,?)", splitUpNames);
 
-        log.info("Querying for customers records where first_name = 'Josh':");
-        jdbcTemplate.query("", new Object[] { "Josh" },
+        log.info("Querying for customer records where first_name = 'Josh':");
+
+        List<Object> result = jdbcTemplate.query("SELECT id, first_name, last_name FROM customers WHERE first_name = ?", new Object[] { "Josh" },
                 (resultSet, rowNum) -> new Customer(
                         resultSet.getLong("id"),
                         resultSet.getString("first_name"),
-                        resultSet.getString("last_name")))
-                .forEach(customer -> log.info(customer.toString()));
+                        resultSet.getString("last_name")));
+        result.forEach(customer -> log.info(customer.toString()));
     }
 }
