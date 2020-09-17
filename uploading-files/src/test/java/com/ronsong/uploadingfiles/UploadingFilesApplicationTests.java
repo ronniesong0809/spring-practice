@@ -29,9 +29,9 @@ class UploadingFilesApplicationTests {
 
     @Test
     public void shouldListAllFiles() throws Exception {
-        given(this.storageService.loadAll()).willReturn(Stream.of(Paths.get("test.txt1"), Paths.get("test2.txt")));
+        given(this.storageService.loadAll()).willReturn(Stream.of(Paths.get("first.txt"), Paths.get("second.txt")));
         this.mvc.perform(get("/")).andExpect(status().isOk())
-                .andExpect(model().attribute("file", Matchers.contains("http://localhost/files/test1.txt", "http://localhost/files/test2.txt")));
+                .andExpect(model().attribute("files", Matchers.contains("http://localhost/files/first.txt", "http://localhost/files/second.txt")));
     }
 
 }
