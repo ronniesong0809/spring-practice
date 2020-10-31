@@ -6,10 +6,14 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Employee {
+class Employee {
     private @Id @GeneratedValue long id;
     private String name;
     private String role;
+
+    Employee() {
+
+    }
 
     Employee(String name, String role) {
         this.name = name;
