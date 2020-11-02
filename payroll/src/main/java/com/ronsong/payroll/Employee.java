@@ -8,15 +8,17 @@ import java.util.Objects;
 @Entity
 public class Employee {
     private @Id @GeneratedValue long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String role;
 
     public Employee() {
 
     }
 
-    public Employee(String name, String role) {
-        this.name = name;
+    public Employee(String firstName, String lastName, String role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.role = role;
     }
 
@@ -25,7 +27,15 @@ public class Employee {
     }
 
     public String getName() {
-        return name;
+        return firstName + " " + lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public String getRole() {
@@ -37,7 +47,17 @@ public class Employee {
     }
 
     public void setName(String name) {
-        this.name = name;
+        String[] nameArray = name.split(" ");
+        this.firstName = nameArray[0];
+        this.firstName = nameArray[1];
+    }
+
+    public void setFirstName(String name) {
+        this.firstName = name;
+    }
+
+    public void setLastName(String name) {
+        this.lastName = name;
     }
 
     public void setRole(String role) {
@@ -54,12 +74,13 @@ public class Employee {
         }
         Employee employee = (Employee) o;
         return Objects.equals(this.id, employee.id)
-                && Objects.equals(this.name, employee.name)
+                && Objects.equals(this.firstName, employee.firstName)
+                && Objects.equals(this.lastName, employee.lastName)
                 && Objects.equals(this.role, employee.role);
     }
 
     @Override
     public String toString() {
-        return "Employee{id=" + this.id + ", name='" + this.name + "', role='" + this.role + "'}";
+        return "Employee{id=" + this.id + ", firstName='" + this.firstName + ", lastName='" + this.lastName + "', role='" + this.role + "'}";
     }
 }
