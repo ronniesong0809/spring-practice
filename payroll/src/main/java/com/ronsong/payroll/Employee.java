@@ -80,6 +80,11 @@ public class Employee {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(this.id, this.firstName, this.lastName, this.role);
+    }
+
+    @Override
     public String toString() {
         return "Employee{id=" + this.id + ", firstName='" + this.firstName + ", lastName='" + this.lastName + "', role='" + this.role + "'}";
     }
