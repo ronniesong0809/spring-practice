@@ -49,7 +49,7 @@ public class Employee {
     public void setName(String name) {
         String[] nameArray = name.split(" ");
         this.firstName = nameArray[0];
-        this.firstName = nameArray[1];
+        this.lastName = nameArray[1];
     }
 
     public void setFirstName(String name) {
